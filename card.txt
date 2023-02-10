@@ -1,0 +1,32 @@
+[]{
+	{
+		Number: 398653,
+		Pin : 1000,
+		UserDetails : {
+			Username: "Abhishek Mali",
+			AccountType: "savings",
+			Contact: 9429865212,
+			Balance: 11000,
+		},
+	},
+	{
+		Number: 102023,
+		Pin : 1002,
+		UserDetails : {
+			Username: "Kishan Mehta",
+			AccountType: "savings",
+			Contact: 9876543210,
+			Balance: 5000,
+		},
+	},
+	{
+		Number: 202310,
+		Pin : 2100,
+		UserDetails : {
+			Username: "Heema Goratela",
+			AccountType: "savings",
+			Contact: 1234567890,
+			Balance: 20000,
+		},
+	},
+}
