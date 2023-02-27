@@ -3,6 +3,7 @@ package main
 import (
 	"GoBasicsPractical/Models"
 	"GoBasicsPractical/Utilities"
+	"bufio"
 	"fmt"
 	"os"
 	"strconv"
@@ -22,28 +23,44 @@ func checkError(err error) {
 	}
 }
 
+func messageError(msg string, err error) {
+	if err != nil {
+		fmt.Println(fmt.Sprint(msg, err))
+	}
+}
+
 func main() {
-	var cardNum int
-	if len(os.Args) < 2 {
-		fmt.Println("usage: main.go [card-number]")
-		os.Exit(0)
-	}
-	args := os.Args[1:2]
-	if len(args) != 1 {
-		fmt.Println("usage: main.go [card-number]")
-		os.Exit(0)
-	}
-	cardNum, _ = strconv.Atoi(args[0])
-	if cardNum <= 0 {
-		fmt.Println("Invalid Card")
-		os.Exit(0)
-	}
+	var (
+		value   string
+		err     error
+		cardNum int
+		card    Models.Card
+		ok      bool
+	)
+	in := bufio.NewReader(os.Stdin)
 	initialize()
-	card, ok := cards[cardNum]
+	fmt.Println("Welcome to ATM: ")
+	fmt.Println("Please Insert Your Card: ")
+	for {
+
+		//fmt.Scan(&cardNum)
+		value, err = in.ReadString('\n')
+		checkError(err)
+		value = strings.TrimSpace(value)
+		cardNum, err = strconv.Atoi(value)
+		messageError("Invalid Card Reason:", err)
+		card, ok = cards[cardNum]
+		if ok {
+			break
+		}
+		fmt.Println("Invalid Card Please insert Valid Card")
+	}
 	defer func() {
 		if err := recover(); err != nil {
 			fmt.Println(err)
-			var choice string
+			var (
+				choice string
+			)
 			fmt.Println("Do You Wish To Conintue(yes to continue): ")
 			fmt.Scan(&choice)
 			if strings.EqualFold(choice, "yes") {
