@@ -92,6 +92,7 @@ func BankOperations(card *Models.Card) {
 		value   string
 		err     error
 		yesNo   string
+		flag    int
 	)
 	fmt.Println("-----Welcome ", userDetails.Username(), " -----")
 	fmt.Println("1. Withdraw Money")
@@ -116,16 +117,18 @@ func BankOperations(card *Models.Card) {
 		balance = CheckBalance(card)
 	case 3:
 		balance = CheckBalance(card)
-		fmt.Println("Do You Wish To Conintue(yes to continue): ")
-		yesNo = input("Invalid choice.")
+		flag = 1
+
 	default:
 		log.Fatal("other features not available")
-		fmt.Println("Do You Wish To Conintue(yes to continue): ")
-		yesNo = input("Invalid choice.")
 	}
 	fmt.Println("Hello ", userDetails.Username(), ", Your balance: ", balance)
-	if strings.EqualFold(yesNo, "yes") {
-		BankOperations(card)
+	if flag == 1 {
+		fmt.Println("Do You Wish To Conintue(yes to continue): ")
+		yesNo = input("Invalid choice.")
+		if strings.EqualFold(yesNo, "yes") {
+			BankOperations(card)
+		}
 	}
 }
 
